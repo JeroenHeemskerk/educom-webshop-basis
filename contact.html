@@ -7,6 +7,75 @@
       <li><a href="./about.html"> ABOUT</a></li>
       <li><a href="./contact.html"> CONTACT</a></li>
     </ul>
+    <br />
+    <label for="contactForm"> Neem contact met ons</label>
+    <form id="contactForm" action="#" method="post">
+      <label for="aanhef"> Aanhef</label>
+      <select id="aanhef" name="aanhef" required>
+        <option value="dhr">Dhr.</option>
+        <option value="mvr">Mvr.</option>
+      </select>
+      <br />
+      <label for="naam">naam : </label>
+      <input
+        type="text"
+        id="naam"
+        name="naam"
+        value=""
+        placeholder="jouw naam"
+        required
+      />
+      <br />
+      <label for="email">email : </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value=""
+        placeholder="jouw email"
+        required
+      />
+      <br />
+      <label for="telefoon">naam : </label>
+      <input
+        type="tel"
+        id="telefoon"
+        name="telefoon"
+        value=""
+        placeholder="jouw telefoon"
+        required
+      />
+      <br />
+      <label for="communicatievoorkeur"
+        >wat is jouw communicatievoorkeur?
+      </label>
+      <br />
+      <input
+        type="radio"
+        id="communicatievoorkeurEmail"
+        name="communicatievoorkeur"
+        value="email"
+      />
+      <label for="communicatievoorkeurEmail">Email</label>
+
+      <br />
+      <input
+        type="radio"
+        id="communicatievoorkeurTel"
+        name="communicatievoorkeur"
+        value="Telefoon"
+      />
+      <label for="communicatievoorkeurTel">Telefoon</label>
+      <br />
+      <label for="bericht">
+        Laat ons weten waarover je contact wil opnemen</label
+      >
+      <br />
+      <textarea id="bericht" name="bericht" rows="4" cols="50"> </textarea>
+
+      <br />
+      <input type="submit" value="Sturen" />
+    </form>
     <footer>
       <p>&copy; 2022, Abdel</p>
     </footer>
