@@ -1,6 +1,7 @@
 <?php
 
 $requested_page = getRequestedPage();
+//echo $requested_page;
 showResponsePage($requested_page);
 
 
@@ -44,6 +45,9 @@ function showResponsePage($request_page)
         case 'contact':
             echo_html_document(array("title" => "contact", "script" => "", "style" => "css/stylesheet.css"), 'showBodyContactContent');
             break;
+            case 'register':
+                echo_html_document(array("title" => "contact", "script" => "", "style" => "css/stylesheet.css"), 'showBodyRegisterContent');
+                break;
         default : error_message('URL is niet geldig');
             
     }
@@ -57,7 +61,7 @@ function echo_html_document($head, $body)
     <html><head>' . 
     echoHead($head) . PHP_EOL;
     echo '</head>
-    <body class="main">';
+    <body class="body">';
     echo_html_body($body) . PHP_EOL;
     echo '</body>
     </html>';
@@ -82,11 +86,13 @@ function echo_html_body($pageBody)
 function showBodyHeader()
 {
     echo '
-    <div class="head">
+    <div class="header">
       <ul class="navLijst">
         <li class="navElement"><a href="./index.php?page=home"> HOME</a></li>
+        <li class="navElement"><a href="./index.php?page=register"> REGISTER</a></li>
         <li class="navElement"><a href="./index.php?page=about"> ABOUT</a></li>
         <li class="navElement"><a href="./index.php?page=contact"> CONTACT</a></li>
+
       </ul>
     </div>';
 }
@@ -110,7 +116,9 @@ function showBodyContactContent()
 {
     include('./contact.php');
 }
-
+function showBodyRegisterContent(){
+    include('./register.php');
+}
 function error_message($message)
 {
     echo '<h2 style="color:red;">' . $message . '<h2>';

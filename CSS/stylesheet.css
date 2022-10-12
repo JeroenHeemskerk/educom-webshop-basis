@@ -1,12 +1,16 @@
 /* Cascade Style Sheet for this website */
-.main {
-  width: 800px;
+.body {
+  min-width: 400px;
   margin: auto;
   background-color: white;
-  color: darkgrey;
-  font-size: 12px;
+  color: rgb(35, 35, 35);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
   padding: 0px;
+  
+  
 }
+* {box-sizing: border-box}
 .content {
   border-style: solid;
   border-width: 0px 10px;
@@ -14,55 +18,23 @@
   padding: 10px;
   margin: 0;
 }
-.head {
-  margin-top: 48px;
+
+.header {
+  margin-top: 0px;
   text-align: center;
   background-color: black;
 }
-.message {
-  color: blue;
-  text-align: center;
-  margin: 0px;
-}
-/*
-  .head li {
-    display: inline-block;
-    margin: 0px 20px;
-    border-style: solid;
-    border-width: 2px;
-    
-  }
-  */
-.head a {
+.header a {
   text-decoration: none;
   color: white;
   font-size: 18px;
   text-align: center;
   padding: 14px 16px;
 }
-.head a:hover {
+.header a:hover {
   background-color: #111;
 }
 
-.footer {
-  color: white;
-  background-color: rgb(76, 75, 75);
-  font-size: 10px;
-  margin: 0px;
-}
-input {
-  width: 400px;
-}
-input[type="radio"] {
-  height: 10px;
-  width: 10px;
-  background-color: #eee;
-  border-radius: 25%;
-}
-span {
-  color: red;
-  background-color: #eee;
-}
 
 .navLijst {
   list-style-type: none;
@@ -76,10 +48,44 @@ span {
 }
 
 .navElement {
-  color: yellow;
   padding: 5px 10px;
 }
+.contact, .register{
+  margin: auto;
+  width: 80%;
+}
 
+
+
+.message {
+  color: blue;
+  text-align: center;
+  margin: 0px;
+}
+
+
+.footer {
+  color: white;
+  background-color: rgb(76, 75, 75);
+  font-size: 10px;
+  margin: 0px;
+}
+/*
+input {
+  width: 400px;
+}
+input[type="radio"] {
+  height: 10px;
+  width: 10px;
+  background-color: #eee;
+  border-radius: 25%;
+}
+*/
+span {
+  color: red;
+  background-color: #eee;
+}
+/*  thinks Pagina*/
 .gegevensElement {
   display: flex;
   font-size: 16px;
@@ -88,4 +94,70 @@ span {
 .elementBlock{
   flex: 50%;
   padding: 10px;
+}
+/* Full-width input fields */
+.inputText {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.inputText:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+.submit {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.submit:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
 }
