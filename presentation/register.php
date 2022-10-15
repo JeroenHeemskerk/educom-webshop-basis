@@ -2,30 +2,20 @@
 
 function ShowRegisterForm($data)
 {
-  return '
-<div class="register" >
-<form action="index.php" method="POST" style="border:1px solid #ccc">
-  <div class="container">
-    <h1>Sign Up</h1>
-    <p>vul uw inlog gegevens in </p>
-    <hr>
-    <label for="naam"><b>Naam. </b> <span class="errSapn">' . $data['naam']['error'] . '</span></label>
-    <input class="inputText" type="text" placeholder="Vul je naam in" name="naam" value="' . $data['naam']['value'] . '">
+  $formElements= '';
+  foreach($data as $key  => $value){
+    if(in_array($key , array('naam','email', 'wachtwoord', 'herhaaldWachtwoord'))){
+    $spn = span($class='errSapn', $content= $value['error']);
+    $formElements.=label($for = $key, $id = '', $class = '',b($value['label']) . $spn);
+    $formElements.=input($type = $value['type'], $id = '', $value = $value['value'],  $name = $key, $class = 'inputText', $content = '', '', $placeholder = '');
+  }}
+  $container = h1('Sign Up'). p('vul jouw inlog gegevens in') . hr() .
+  $formElements . 
+  input($type = 'hidden', $id = 'page', $value = 'register', $name = 'page', $class = '', $content = '', '', $placeholder = '') . 
+  div($class = 'clearfix', $content= input($type = 'submit', $id = '', $value = 'sturen', $name = '', $class = 'submit', $content = '', '', $placeholder = ''));
 
-    <label for="email"><b>Email </b><span class="errSapn">' . $data['email']['error'] . '</span></label>
-    <input class="inputText" type="text" placeholder="Vul je Email in" name="email" value="' . $data['email']['value'] . '">
-
-    <label for="psw"><b>Password</b><span class="errSapn">' . $data['wachtwoord']['error'] . '</span></label>
-    <input class="inputText" type="password" placeholder="vul je wachtwoord in" name="wachtwoord" value="' . $data['wachtwoord']['value'] . '">
-
-    <label for="psw-repeat"><b>herhaal wachtwoord Password</b><span class="errSapn">' . $data['herhaaldWachtwoord']['error'] . '</span></label>
-    <input class="inputText" type="password" placeholder="herhaal je wachtwoord" name="herhaaldWachtwoord" value="' . $data['herhaaldWachtwoord']['value'] . '">
-    <input type="hidden" id="page" name="page" value="register" />
-    <div class="clearfix">
-      <input class="submit" type="submit" class="signupbtn" value="Sturen">
-    </div>
-  </div>
-</form>
-</div>
-';
+  $form=form($id = '', $action = 'index.php', $method = 'POST',div( $class ='container' ,$content =$container));
+  $register = div($class = 'register', $content = $form);
+  return $register;
+   
 }

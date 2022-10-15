@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+include("./presentation/components.php");
 include("./presentation/layout.php");
 include("./validations/validations.php");
 include("./presentation/contact.php");
@@ -116,6 +116,6 @@ function showResponsePage($data)
             echo_html_document(array("title" => "Log in", "script" => "", "style" => "css/stylesheet.css"), showContactThinks($data));
             break;
         default:
-            echo 'URL is niet geldig';
+            echo $data['page'] . ' URL is niet geldig';
     }
 }

@@ -1,62 +1,54 @@
 <?php
-
-
 function ShowContactForm($data)
 {
-  return '<div class="contact ">
-  <form style="border:1px solid #ccc" id="contactForm" action="index.php" method="POST">
-      <div class="container">
-          <h1>Contact</h1>
-          <p> vul dit formulier in </p>
-          <hr>
-          <label for="aanhef"> Aanhef</label>
-          <select class="inputText" id="aanhef" name="aanhef" required>
-              <option value="dhr" ' . ($data['aanhef']['value']=='dhr'? 'selected': '') . '>Dhr.</option>
-              <option value="mvr" ' . ($data['aanhef']['value']=='mvr'? 'selected': '') . '>Mvr.</option>
-          </select>
-
-          <label for="naam">naam : </label><span class="errSapn" style="color:red">' . $data['naam']['error'] . '</span>
-          <input class="inputText" type="text" id="naam" name="naam" value="' .  $data['naam']['value'] . '" placeholder="jouw naam" />
-          
-          
-
-
-          <label for="email">email : <span class="errSapn">' . $data['email']['error'] . '</span></label>
-          <input class="inputText" type="text" id="email" name="email" value="' .  $data['email']['value'] . '" placeholder="jouw email" />
-          
-          
-
-          <label for="telefoon">Tel : <span class="errSapn">' . $data['telefoon']['error'] . '</span></label>
-          <input class="inputText" type="tel" id="telefoon" name="telefoon" value="' .  $data['telefoon']['value'] . '" placeholder="jouw telefoon" />
-          
-
-          <label for="communicatievoorkeur">wat is jouw communicatievoorkeur?
-          <span class="errSapn">' . $data['communicatievoorkeur']['error'] . '</span>
-          <br />
-          <label for="communicatievoorkeurEmail">
-          <input  type="radio" ' . ($data['communicatievoorkeur']['value']=='email'? 'checked': '') . ' id="communicatievoorkeurEmail" name="communicatievoorkeur" value="email" />Email
-          </label>
-          <label for="communicatievoorkeurTel">
-          <input  type="radio" ' . ($data['communicatievoorkeur']['value']=='Telefoon'? 'checked': '') . '  id="communicatievoorkeurTel" name="communicatievoorkeur" value="Telefoon" />Telefoon
-          </label>
-          
-          
-          <br />
-          <label for="bericht">
-              Laat ons weten waarover je contact wil opnemen. <span class="errSapn">' . $data['message']['error'] . '</span>
-              </br>
-          <textarea class="BerichtInput" id="bericht" name="bericht" rows="4" cols="50">
-          ' .  $data['message']['value'] . '
-          </textarea></label></br>
-          
-
-          <input type="hidden" id="page" name="page" value="contact" />
-
-          <input class="submit" type="submit" value="Sturen">
-
-      </div>
-  </form>
-
-</div>
-  ';
+ $formElements = h1('Contact') .  p('vul dit formulier in ') . hr();
+  $formElements .= buildFormElementsFromData($data);
+  $formElements .= input($type = 'hidden', $id = 'page', $value = 'contact', $name = 'page', $class = '', $content = '', '');
+  $formElements .= input($type = 'submit', $id = 'submit', $value = 'sturen', $name = 'submit', $class = 'submit','', '');
+  $formContainer = div('container', $formElements);
+  $formC = form('contactForm', 'index.php', 'POST', $formContainer);
+  $contact =  div('contact', $formC);
+  return  $contact;
+}
+function buildFormElementsFromData($data)
+{
+  //print_r( $data);
+  $formElements = '';
+  foreach ($data['formFields'] as $key) {
+    
+    switch ($data[$key]['type']) {
+      case 'select':
+        $formElements .= label($key, '', '', $data[$key]['label']);
+        for ($i = 0; $i < sizeof($data[$key]['options']); $i++)
+          $data[$key]['options'][$i]['selected'] = ($data['aanhef']['value'] == $data[$key]['options'][$i]['value'] ? 'selected' : '');
+        $formElements .= select('', $key, 'inputText', 'required', $data[$key]['options']);
+        break;
+      case 'text':
+        $formElements .= label($key, '', '',  $data[$key]['label']);
+        $formElements .= span('errSapn', $data[$key]['error']);
+        $formElements .= input($data[$key]['type'], $key, $data[$key]['value'], $key, $class = 'inputText', $content = '','' ,  $data[$key]['placeholder']);
+        break;
+      case 'email':
+        $formElements .= label($key, '', '',  $data[$key]['label']);
+        $formElements .= span('errSapn', $data[$key]['error']);
+        $formElements .= input($data[$key]['type'], $key, $data[$key]['value'], $key, $class = 'inputText', $content = '', '' , $data[$key]['placeholder']);
+        break;
+      case 'radio':
+        $spn = span('errSapn', $data[$key]['error']);
+        $formElements .= label($key, '', '',  $data[$key]['label'] . '  ' . $spn);
+        foreach ($data[$key]['options'] as $opt => $val) {
+         //echo "opt = " . $opt . "  ###val = " . $val . '   ####key = ' .  $key . '  ####data val = ' . $data[$key]['value']  . '<BR>';
+          $rad = input('radio', $key . $opt, $value = $opt, $name = $key, $class = '', $content = $val, ($data[$key]['value'] == $opt ? 'checked' : ''));
+          $formElements .= label($key . $val, '', '', $rad);
+        }
+        break;
+        case 'textarea' : 
+          $spn = span('errSapn', $data[$key]['error']);
+          $formElements .= label($key, '', '',  $data[$key]['label'] .  ' ' . $spn );
+          $formElements .=textarea($class = 'BerichtInput', $id = $key, $name = 'bericht', $message = $data['message']['value']);
+        break;
+          default : echo $data[$key]['type'] . "==default <BR>";
+    }
+  }
+  return  $formElements;
 }

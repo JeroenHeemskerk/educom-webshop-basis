@@ -2,16 +2,12 @@
 
 function showContactThinks($data)
 {
-  $echoVal = "<div class='content'>
-  <h1>we nemen contact zo snel mogelijk met u op</h1>
-  <h3>U gegevens zijn : </h3>";
-  foreach ($data as $key => $element) {
-    if ($key != 'validForm'&& $key != 'page')
-      $echoVal = $echoVal . '<div class="gegevensElement">
-  <div class="elementBlock">' .  $key . '</div>
-  <div class="elementBlock">' .  $element['value'] . '</div>
-</div>';
+  $divContent = h1('we nemen contact zo snel mogelijk met u op');
+  foreach ($data['formFields'] as $key) {
+    $left= div('elementBlock',$key);
+    $right = div('elementBlock',$data[$key]['value']);
+    $divContent .=div('gegevensElement', $left . $right);
   }
-  $echoVal = $echoVal . "</div>";
+  $echoVal = div($class = 'content', $content = $divContent);
   return $echoVal;
 }

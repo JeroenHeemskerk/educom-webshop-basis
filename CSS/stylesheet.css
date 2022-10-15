@@ -85,7 +85,7 @@ span {
   color: red;
   background-color: #eee;
 }
-/*  thinks Pagina*/
+
 .gegevensElement {
   display: flex;
   font-size: 16px;
@@ -95,7 +95,7 @@ span {
   flex: 50%;
   padding: 10px;
 }
-/* Full-width input fields */
+
 .inputText {
   width: 100%;
   padding: 15px;
@@ -131,14 +131,9 @@ hr {
   opacity:1;
 }
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.signupbtn {
   float: left;
   width: 50%;
 }
@@ -160,4 +155,11 @@ hr {
   .cancelbtn, .signupbtn {
      width: 100%;
   }
+}
+label{
+  display: block;
+  width: 100%;
+}
+form{
+  border:1px solid #ccc;
 }
